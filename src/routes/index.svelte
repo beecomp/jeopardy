@@ -11,24 +11,24 @@
 	const contestants = [
 		{
 			name: 'Otto - Sumendap',
-			score: 300
+			score: 300,
 		},
 		{
 			name: 'Otto - Sumendap',
-			score: 200
+			score: 200,
 		},
 		{
 			name: 'Otto - Sumendap',
-			score: 900
+			score: 900,
 		},
 		{
 			name: 'Otto - Sumendap',
-			score: -100
+			score: -100,
 		},
 		{
 			name: 'Otto - Sumendap',
-			score: -100
-		}
+			score: -100,
+		},
 	];
 </script>
 
