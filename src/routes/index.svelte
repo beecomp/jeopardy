@@ -1,12 +1,12 @@
 <script type="text/javascript">
 	import _ from 'lodash';
-	const categories = [
-		'BEFORE AND AFTER',
-		'TEMANNYA OTTO',
-		'ANAGRAMS',
-		'STUPID ANSWERS',
-		'HOMOPHONES'
-	];
+	import { onMount } from 'svelte';
+	import api from '$lib/api';
+
+	let qcs = [];
+	onMount(async () => {
+		qcs = await api.fetchBoard();
+	});
 
 	const contestants = [
 		{
@@ -35,23 +35,31 @@
 <svelte:head>
 	<title>Jeopardy!</title>
 </svelte:head>
+
 <div class="flex flex-col h-screen">
 	<div class="flex-grow grid grid-cols-5 gap-4 p-4 font-barlow-semi text-gray-700">
-		{#each categories as c}
+		{#each qcs as { name }}
 			<div class="p-4 bg-coral rounded shadow-md h-full text-2xl">
-				<div class="flex flex-row h-full items-center justify-center text-center">{c}</div>
+				<div class="flex flex-row h-full items-center justify-center text-center">{name}</div>
 			</div>
 		{/each}
-		{#each _.range(5) as i}
-			{#each _.range(5) as _}
-				<div class="p-4 bg-lavender rounded shadow-md h-full text-6xl">
-					<div class="flex flex-col h-full items-center justify-center">
-						${i * 100 + 100}
+		{#each qcs as { qs }, i}
+			{#each qs as { id, revealed }}
+				<a href={`problem-${id}`}>
+					<div
+						class="p-4 bg-lavender rounded shadow-md h-full text-6xl"
+						class:opacity-40={revealed}
+					>
+						<div class="flex flex-col h-full items-center justify-center">
+							${i * 100 + 100}
+						</div>
 					</div>
-				</div>
+				</a>
 			{/each}
 		{/each}
 	</div>
+
+	<!--
 	<div class="grid grid-flow-col gap-8 p-6">
 		{#each contestants as { name, score }}
 			<div class="bg-lavender rounded shadow-md p-2 ring-4 ring-green-500 ring-offset-2">
@@ -64,4 +72,5 @@
 			</div>
 		{/each}
 	</div>
+	-->
 </div>
