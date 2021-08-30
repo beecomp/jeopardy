@@ -129,6 +129,9 @@
 								{#each qs as q}
 									<button
 										class="flex items-center justify-center bg-lavender p-4 font-barlow-semi text-xl rounded shadow text-gray-700"
+										class:bg-lavender={q.v == 100}
+										class:bg-coral={q.v == 200}
+										class:bg-red-400={q.v == 300}
 										class:opacity-40={q.revealed}
 										on:click={() => setQnState(q, !q.revealed)}
 									>
