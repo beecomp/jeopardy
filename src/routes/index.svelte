@@ -44,10 +44,13 @@
 			</div>
 		{/each}
 		{#each qcs as { qs }, i}
-			{#each qs as { id, revealed }}
+			{#each qs as { id, revealed }, j}
 				<a href={`problem-${id}`}>
 					<div
 						class="p-4 bg-lavender rounded shadow-md h-full text-6xl"
+						class:bg-lavender={(i ^ j) & 1}
+						class:bg-red-400={i & 1 && ~(i ^ j) & 1}
+						class:bg-coral={~i & 1 && ~(i ^ j) & 1}
 						class:opacity-40={revealed}
 					>
 						<div class="flex flex-col h-full items-center justify-center">
